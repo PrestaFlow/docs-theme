@@ -1,0 +1,50 @@
+{% extends '_default/app.html.twig' %}
+
+    {% block styles %}
+    {% set styles = styles|merge(['https://cdnjs.cloudflare.com/ajax/libs/tocbot/' ~ site.tocbot.version ~ '/tocbot.min.css']) %}
+    {% endblock styles %}
+
+    {% block content %}
+      <article class="p-5 md:p-8 bg-white border border-gray-200 shadow-sm rounded-xl lg:mr-72 overflow-x-hidden px-4 py-6">
+        <h1 class="text-3xl font-bold dark:text-white p-4">{{ page.title }}</h1>
+        {#- article content ~#}
+        <section id="content" class="markdown markdown-slate markdown-code:max-w-none dark:markdown-invert max-w-none">
+          {%- block article ~%}
+          {{ page.content|typography }}
+          {%- endblock article ~%}
+        </section>
+        <footer class="pt-6">
+          {{- include('partials/edit.html.twig') ~}}
+        </footer>
+        {#- prev/next navigation ~#}
+        {%- if page.next is defined or page.prev is defined ~%}
+        <nav class="mt-8 bg-white flex flex-col sm:flex-row space-y-2 sm:space-y-0 space-x-0 sm:space-x-4">
+          {%- if page.prev is defined ~%}
+          <a class="basis-1/2 py-2 px-3 font-medium hover:no-underline text-left border-solid border border-secondary-300 hover:border-primary-700 dark:hover:border-primary-400 rounded-md" href="{{ url(page.prev) }}" title="{{ page.prev.title }}">
+            <div class="mb-2 text-sm text-secondary-500 dark:text-secondary-400">{% trans %}Previous{% endtrans %}</div>
+            <div>← {{ page.prev.title }}</div>
+          </a>
+          {%- else ~%}
+          <div class="grow"></div>
+          {%- endif ~%}
+          {%- if page.next is defined ~%}
+          <a class="basis-1/2 py-2 px-3 font-medium hover:no-underline text-right border-solid border border-secondary-300 hover:border-primary-700 dark:hover:border-primary-400 rounded-md" href="{{ url(page.next) }}" title="{{ page.next.title }}">
+            <div class="mb-2 text-sm text-secondary-500 dark:text-secondary-400">{% trans %}Next{% endtrans %}</div>
+            <div>{{ page.next.title }} →</div>
+          </a>
+          {%- endif ~%}
+        </nav>
+        {%- endif ~%}
+      </article>
+    {% endblock content %}
+
+    {% block footer %}
+      {{ parent() }}
+      <div id="button-top" class="fixed bottom-0 mb-4 right-0 mr-4 z-10 opacity-0">
+        <a href="#main" class="rounded-full border-0 flex items-center justify-center w-10 h-10 bg-primary-700 dark:bg-primary-900 text-primary-100 hover:text-primary-50 shadow-md" aria-label="{% trans %}Back to top{% endtrans %}" title="{% trans %}Back to top{% endtrans %}">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18" />
+          </svg>
+        </a>
+      </div>
+    {% endblock %}

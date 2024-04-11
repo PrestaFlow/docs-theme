@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.note h3.p-6 {
+  padding: 0;
+  padding-bottom: 0.75rem;
+}

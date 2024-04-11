@@ -1,0 +1,55 @@
+{% block scripts %}
+    {{ asset('https://cdnjs.cloudflare.com/ajax/libs/tocbot/' ~ site.tocbot.version ~ '/tocbot.min.js', {minify: false})|html }}
+    {{ asset('https://cdnjs.cloudflare.com/ajax/libs/jquery/' ~ site.jquery.version ~ '/jquery.slim.min.js', {minify: false})|html({integrity: 'sha512-5NqgLBAYtvRsyAzAvEBWhaW+NoB+vARl6QiA02AFMhCWvPpi7RWResDcTGYvQtzsHVCfiUhwvsijP+3ixUk1xw==', crossorigin: 'anonymous'}) }}
+    <script>
+      {%- apply minify_js ~%}
+      {# toc #}
+      tocbot.init({
+        tocSelector: '#on-this-page-toc',
+        contentSelector: '#content',
+        // Main class to add to links.
+        linkClass: 'block py-0.5 text-sm leading-6 text-gray-600 hover:text-gray-900 dark:text-slate-400 dark:hover:text-slate-300 hs-scrollspy-active:font-medium hs-scrollspy-active:text-blue-600 dark:hs-scrollspy-active:text-blue-400',
+        // Extra classes to add to links.
+        extraLinkClasses: '',
+        // Class to add to active links,
+        // the link corresponding to the top most heading on the page.
+        activeLinkClass: 'block py-0.5 text-sm leading-6 text-gray-600 hover:text-gray-900 dark:text-slate-400 dark:hover:text-slate-300 hs-scrollspy-active:font-medium hs-scrollspy-active:text-blue-600 dark:hs-scrollspy-active:text-blue-400 active',
+        // Main class to add to lists.
+        listClass: 'ml-4',
+        headingSelector: 'h2, h3, h4, h5, h6',
+        hasInnerContainers: true,
+        scrollSmooth: false,
+        headingsOffset: 70,
+        scrollSmoothOffset: -70,
+      });
+      {# scroll top #}
+      window.addEventListener('scroll', function (e) {
+        document.getElementById('button-top').classList.add('opacity-0');
+        if (window.scrollY > 300) {
+          document.getElementById('button-top').classList.remove('opacity-0');
+        }
+      });
+      {# article anchor #}
+      $(function () {
+        $('article h2, article h3, article h4, article h5, article h6').each(function () {
+          var url = document.URL.replace(/#.*$/, "") + '#' + $(this).attr('id');
+          $(this).append('<a class="anchor-title" href="' + url + '">#</a>');
+        });
+      });
+      {%- endapply ~%}
+    </script>
+    {# mermaid #}
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({ startOnLoad: false, theme: document.documentElement.dataset.theme == 'dark' ? 'dark' : 'default' });
+      await mermaid.run({
+        querySelector: '.language-mermaid',
+      });
+    </script>
+    {% endblock scripts %}
+
+    {%- set javascript = [] ~%}
+
+    {%- block javascript %}{% endblock ~%}
+    {%- set javascript = javascript|merge(['app_v0.3.js']) ~%}
+    <script type="module">{{ asset(javascript)|inline }}</script>

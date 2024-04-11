@@ -1,0 +1,67 @@
+<!doctype html>
+<html class="relative min-h-full default">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrestaFlow</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <script type="module">
+        const html = document.querySelector('html');
+
+        if (localStorage.getItem('hs_theme') === 'light' && html.classList.contains('dark')) html.classList.remove('dark');
+        else if (localStorage.getItem('hs_theme') === 'dark' && html.classList.contains('light')) html.classList.remove('light');
+        else if (localStorage.getItem('hs_theme') === 'dark' && !html.classList.contains('dark')) html.classList.add('dark');
+        else if (localStorage.getItem('hs_theme') === 'light' && !html.classList.contains('light')) html.classList.add('light');
+    </script>
+
+    {%- set styles = [] ~%}
+
+    {%- block styles %}{% endblock ~%}
+    <link href="{{ asset('app.css') }}" rel="stylesheet" />
+    <link href="{{ asset('_prism.css') }}" rel="stylesheet" />
+
+    <style type="text/css">
+        .apexcharts-tooltip.apexcharts-theme-light {
+            background-color: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
+    </style>
+
+    <script type="text/javascript" src="{{ asset('hs.theme-appearance.js') }}" />
+
+    <script type="module">
+        const html = document.querySelector('html');
+
+        if (!localStorage.getItem('hs_theme'))
+
+        if (localStorage.getItem('hs_theme') === 'light' && html.classList.contains('dark')) html.classList.remove('dark');
+        else if (localStorage.getItem('hs_theme') === 'dark' && html.classList.contains('light')) html.classList.remove('light');
+        else if (localStorage.getItem('hs_theme') === 'dark' && !html.classList.contains('dark')) html.classList.add('dark');
+        else if (localStorage.getItem('hs_theme') === 'light' && !html.classList.contains('light')) html.classList.add('light');
+    </script>
+</head>
+
+<body class="light mb-[40px] sm:mb-[64px] bg-gray-50 dark:bg-neutral-900 [--body-scroll:true] [--overlay-backdrop:false]">
+      {{- include('partials/sidebar.html.twig') ~}}
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <main id="content" role="main" class="lg:ps-[260px] pt-4">
+          {{- include('partials/rightbar.html.twig') ~}}
+        <div class="p-2 sm:p-5 sm:py-0 md:pt-5 space-y-5">
+            <!-- Breadcrumb -->
+            {% block breadcrumb %}{% endblock %}
+            <!-- End Breadcrumb -->
+           {% block content %}{% endblock %}
+
+        </div>
+    </main>
+
+    {{- include('partials/footer.html.twig') ~}}
+    {{- include('partials/javascript.html.twig') ~}}
+</body>
+
+</html>

@@ -1,1 +1,1 @@
-# docs-theme
+# _Docs_ theme
