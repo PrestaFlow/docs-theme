@@ -15,7 +15,7 @@
     "cecil/theme-installer": "^1.0||^2.0"
   },
   "extra": {
-    "name": "docs",
+    "name": "prestaflow",
     "branch-alias": {
       "dev-master": "2.x-dev"
     }
