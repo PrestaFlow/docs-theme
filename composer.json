@@ -1,9 +1,16 @@
 {
-  "name": "cecil/theme-docs",
+  "name": "prestaflow/docs-theme",
   "type": "cecil-theme",
-  "description": "Cecil theme Docs",
+  "authors": [
+    {
+      "name": "Jonathan Danse",
+      "email": "j.danse@prestaedit.com",
+      "homepage": "https://prestaedit.github.io",
+      "role": "Developer"
+    }
+  ],
+  "description": "PrestaFlow theme Docs",
   "keywords": ["Cecil", "theme", "documentation"],
-  "license": "MIT",
   "require": {
     "cecil/theme-installer": "^1.0||^2.0"
   },
