@@ -4,7 +4,6 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PrestaFlow</title>
     {{- include('partials/metatags.html.twig') ~}}
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -21,8 +20,12 @@
     {%- set styles = [] ~%}
 
     {%- block styles %}{% endblock ~%}
-    <link href="{{ asset('app.css') }}" rel="stylesheet" />
-    <link href="{{ asset('_prism.css') }}" rel="stylesheet" />
+    <style type="text/css">
+    {{ asset('app.css')|inline }}
+    </style>
+    <style type="text/css">
+    {{ asset('_prism.css')|inline }}
+    </style>
 
     <style type="text/css">
         .apexcharts-tooltip.apexcharts-theme-light {
@@ -32,7 +35,7 @@
         }
     </style>
 
-    <script type="text/javascript" src="{{ asset('hs.theme-appearance.js') }}" />
+    <script type="module">{{ asset('hs.theme-appearance.js')|inline }}</script>
 
     <script type="module">
         const html = document.querySelector('html');
